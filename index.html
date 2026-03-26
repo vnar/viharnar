@@ -72,12 +72,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
 .tl-legend-item{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);}
 .tl-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .tl-hint{font-size:11px;color:var(--gold);margin-left:auto;}
-.tl-grid{display:grid;grid-template-columns:1fr 40px 1fr;position:relative;}
+.tl-grid{position:relative;}
 .tl-spine-col{display:flex;flex-direction:column;align-items:center;position:relative;}
-.tl-spine-line{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(201,168,76,0.9),rgba(201,168,76,0.1));left:50%;transform:translateX(-50%);}
+.tl-spine-line{position:absolute;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(201,168,76,0.9),rgba(201,168,76,0.1));left:50%;transform:translateX(-50%);pointer-events:none;}
 .tl-left{padding-right:20px;}
 .tl-right{padding-left:20px;}
-.tl-row-left,.tl-row-right,.tl-row-dot{margin-bottom:28px;}
+.tl-row{display:grid;grid-template-columns:1fr 40px 1fr;align-items:start;margin-bottom:28px;}
+.tl-row-mobile{display:grid;grid-template-columns:28px 1fr;align-items:start;margin-bottom:24px;}
+.tl-row-dot{display:flex;flex-direction:column;align-items:center;}
+.tl-row-mobile-card{padding-left:16px;padding-right:0;}
+.tl-row-left,.tl-row-right{margin-bottom:0;}
 .tl-dot-wrap{display:flex;justify-content:center;padding-top:16px;}
 .tl-dot{width:13px;height:13px;border-radius:50%;background:var(--navy);border:2px solid var(--gold);position:relative;z-index:1;cursor:pointer;transition:all 0.2s;flex-shrink:0;}
 .tl-dot.cur{background:var(--gold);box-shadow:0 0 0 4px rgba(201,168,76,0.2);animation:pulse 2s infinite;}
@@ -91,13 +95,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
 .tl-card::after{content:'';position:absolute;top:22px;width:20px;height:1px;background:rgba(201,168,76,0.25);}
 .tl-left .tl-card::after{right:-20px;}
 .tl-right .tl-card::after{left:-20px;}
-.tl-empty{background:transparent;border:none;cursor:default;min-height:40px;}
+.tl-empty{background:transparent;border:none;cursor:default;min-height:0;padding:0;}
 .tl-empty:hover,.tl-empty:active{transform:none;background:transparent;border:none;}
 .tl-empty::after{display:none;}
+.tl-mobile-stack{display:flex;flex-direction:column;gap:12px;}
 .tc-company{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
 .tc-role{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--white);line-height:1.3;margin-bottom:2px;}
 .tc-dates{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.32);margin-bottom:7px;}
-.tc-summary{font-size:12.5px;color:rgba(255,255,255,0.58);line-height:1.65;}
+.tc-summary{
+  font-size:12.5px;
+  color:rgba(255,255,255,0.58);
+  line-height:1.65;
+  /* Keep collapsed timeline card heights stable so year dots align with cards. */
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:4;
+  line-clamp:4;
+  overflow:hidden;
+  min-height:calc(1em * 1.65 * 4);
+}
 .now-badge{background:var(--gold);color:var(--navy);font-size:8px;padding:2px 5px;border-radius:2px;font-family:'DM Mono',monospace;vertical-align:middle;margin-left:5px;}
 .tc-toggle{font-size:11px;color:var(--gold);margin-top:8px;display:flex;align-items:center;gap:5px;min-height:32px;}
 .tc-arrow{display:inline-block;transition:transform 0.2s;}
@@ -188,6 +204,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   .hero-panel-title{font-size:9px;margin-bottom:10px;}
   .hero-bar-item{margin-bottom:9px;}
   .hero-bar-top{font-size:11px;}
+  
+  /* help mobile users know what to do next */
+  .scroll-hint{display:flex;justify-content:center;align-items:center;gap:10px;color:var(--gold);font-size:12px;margin-top:18px;}
 
   /* section */
   .section{padding:48px var(--px);}
@@ -197,21 +216,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   .tl-legend{gap:10px;margin-bottom:20px;}
   .tl-hint{margin-left:0;width:100%;}
 
-  .tl-grid{grid-template-columns:28px 1fr;grid-template-areas:'dot card';}
-
-  /* hide education left col on mobile — merged into right */
-  .tl-left{display:none;}
-  .tl-spine-col{grid-column:1;}
-  .tl-right{grid-column:2;padding-left:16px;padding-right:0;}
-  .tl-spine-line{left:50%;transform:translateX(-50%);}
-
-  /* connector line goes left on mobile */
-  .tl-right .tl-card::after{left:-16px;width:16px;}
+  .tl-spine-line{left:14px;transform:translateX(-50%);}
+  .tl-row-mobile .tl-card::after{display:none;}
 
   /* cards touch-friendly */
   .tl-card{padding:14px 16px;}
   .tc-role{font-size:14px;}
   .tc-summary{font-size:12px;}
+  .tc-summary{
+    /* Match the same collapsed height across cards on mobile. */
+    min-height:calc(1em * 1.65 * 4);
+  }
   .tc-toggle{min-height:40px;font-size:12px;}
   .tc-bullets li{font-size:12px;padding:6px 0 6px 13px;}
 
@@ -316,9 +331,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   </div>
 
   <div class="tl-grid" id="tlGrid">
-    <div class="tl-left" id="tlLeft"></div>
-    <div class="tl-spine-col" id="tlSpine"><div class="tl-spine-line"></div></div>
-    <div class="tl-right" id="tlRight"></div>
+    <div class="tl-spine-line" aria-hidden="true"></div>
+    <div id="tlRows"></div>
   </div>
 </div>
 </div>
@@ -536,42 +550,67 @@ allItems.forEach(function(entry){
   if(!placed) rows.push([entry]);
 });
 
-var tlLeft = document.getElementById('tlLeft');
-var tlSpine = document.getElementById('tlSpine');
-var tlRight = document.getElementById('tlRight');
+var tlRows = document.getElementById('tlRows');
+tlRows.innerHTML = '';
 
-rows.forEach(function(row){
-  var leftEntry = row.find(function(r){return r.side==='left';});
-  var rightEntry = row.find(function(r){return r.side==='right';});
-  var isCurrent = (rightEntry && rightEntry.item.current) || (leftEntry && leftEntry.item.current);
-  var yr = Math.floor((leftEntry||rightEntry).item.year);
+var isMobileTimeline = !!(window.matchMedia && window.matchMedia('(max-width:767px)').matches);
 
-  // left cell
-  var ld = document.createElement('div');
-  ld.className = 'tl-row-left';
-  if(leftEntry){
-    ld.innerHTML = buildCard(leftEntry.item);
-  } else {
-    ld.innerHTML = '<div class="tl-card tl-empty" style="min-height:60px;"></div>';
-  }
-  tlLeft.appendChild(ld);
+if(isMobileTimeline){
+  // Recruiter-friendly mobile: show a single, clean list (Experience first; Education appears further down).
+  var mobileItems = [];
+  exp.forEach(function(e){ mobileItems.push({item:e}); });
+  edu.forEach(function(e){ mobileItems.push({item:e}); });
+  mobileItems.sort(function(a,b){ return b.item.year - a.item.year; });
 
-  // spine dot
-  var sd = document.createElement('div');
-  sd.className = 'tl-row-dot';
-  sd.innerHTML = '<div class="tl-dot-wrap"><div class="tl-dot'+(isCurrent?' cur':'')+'"></div><div class="tl-yr">'+yr+'</div></div>';
-  tlSpine.appendChild(sd);
+  mobileItems.forEach(function(entry){
+    var item = entry.item;
+    var isCurrent = !!item.current;
+    var yr = Math.floor(item.year);
 
-  // right cell
-  var rd = document.createElement('div');
-  rd.className = 'tl-row-right';
-  if(rightEntry){
-    rd.innerHTML = buildCard(rightEntry.item);
-  } else {
-    rd.innerHTML = '<div class="tl-card tl-empty" style="min-height:60px;"></div>';
-  }
-  tlRight.appendChild(rd);
-});
+    var rowEl = document.createElement('div');
+    rowEl.className = 'tl-row-mobile';
+
+    var dotCell = document.createElement('div');
+    dotCell.className = 'tl-row-dot';
+    dotCell.innerHTML = '<div class="tl-dot-wrap"><div class="tl-dot'+(isCurrent?' cur':'')+'"></div><div class="tl-yr">'+yr+'</div></div>';
+
+    var cardCell = document.createElement('div');
+    cardCell.className = 'tl-row-mobile-card';
+    cardCell.innerHTML = buildCard(item);
+
+    rowEl.appendChild(dotCell);
+    rowEl.appendChild(cardCell);
+    tlRows.appendChild(rowEl);
+  });
+} else {
+  // Desktop/tablet: each timeline row contains dot + cards together, so expanding details can't desync dates.
+  rows.forEach(function(row){
+    var leftEntry = row.find(function(r){return r.side==='left';});
+    var rightEntry = row.find(function(r){return r.side==='right';});
+    var isCurrent = (rightEntry && rightEntry.item.current) || (leftEntry && leftEntry.item.current);
+    var yr = Math.floor(((rightEntry||leftEntry).item.year));
+
+    var rowEl = document.createElement('div');
+    rowEl.className = 'tl-row';
+
+    var leftCell = document.createElement('div');
+    leftCell.className = 'tl-row-left tl-left';
+    leftCell.innerHTML = leftEntry ? buildCard(leftEntry.item) : '<div class="tl-card tl-empty"></div>';
+
+    var dotCell = document.createElement('div');
+    dotCell.className = 'tl-row-dot';
+    dotCell.innerHTML = '<div class="tl-dot-wrap"><div class="tl-dot'+(isCurrent?' cur':'')+'"></div><div class="tl-yr">'+yr+'</div></div>';
+
+    var rightCell = document.createElement('div');
+    rightCell.className = 'tl-row-right tl-right';
+    rightCell.innerHTML = rightEntry ? buildCard(rightEntry.item) : '<div class="tl-card tl-empty"></div>';
+
+    rowEl.appendChild(leftCell);
+    rowEl.appendChild(dotCell);
+    rowEl.appendChild(rightCell);
+    tlRows.appendChild(rowEl);
+  });
+}
 
 function buildCard(item){
   var metrics = (item.metrics||[]).map(function(m){return '<span class="tc-met">'+m+'</span>';}).join('');
@@ -592,7 +631,9 @@ function buildCard(item){
 }
 
 function toggle(el){
-  if(!el.classList.contains('tl-empty')) el.classList.toggle('open');
+  if(!el.classList.contains('tl-empty')){
+    el.classList.toggle('open');
+  }
 }
 
 // ── INTERSECTION OBSERVER ──
