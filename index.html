@@ -255,11 +255,122 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
 
 /* WIDE SECTIONS (desktop) */
 @media(min-width:1200px){
-  .impact-wrap .section,.proof-wrap .section{max-width:1400px;}
+  .metrics-wrap .section,.flagship-wrap .section,.outcomes-wrap .section{max-width:1400px;}
+}
+@media(min-width:1400px){
+  .metrics-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;}
 }
 
-/* IMPACT AT A GLANCE */
-.impact-wrap{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.sec-lead{font-size:14px;line-height:1.65;color:rgba(255,255,255,0.5);max-width:720px;margin:-28px 0 36px;}
+
+/* SIGNATURE METRICS (top 6) */
+.metrics-wrap{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.metrics-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
+.metric-item{
+  background:linear-gradient(160deg,rgba(255,255,255,0.05),rgba(255,255,255,0.012));
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:8px;
+  padding:22px 20px;
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  transition:border-color 0.2s ease,box-shadow 0.2s ease;
+}
+.metric-item:hover{border-color:rgba(201,168,76,0.32);box-shadow:0 12px 28px rgba(0,0,0,0.2);}
+.metric-k{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px;}
+.metric-n{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;color:var(--gold2);line-height:1.05;margin-bottom:10px;letter-spacing:-0.03em;}
+.metric-d{font-size:13px;line-height:1.55;color:rgba(255,255,255,0.58);}
+
+/* FLAGSHIP / SELECTED WORK */
+.flagship-wrap{background:var(--navy);border-top:1px solid var(--border);}
+.flagship-grid{
+  display:grid;
+  gap:20px;
+  grid-template-columns:1fr;
+  align-items:stretch;
+}
+/* Medium desktop: 3 + 2 (bottom row centered via 6-column grid) */
+@media(min-width:900px) and (max-width:1399px){
+  .flagship-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr));
+  }
+  .flagship-grid .flagship-card:nth-child(1),
+  .flagship-grid .flagship-card:nth-child(2),
+  .flagship-grid .flagship-card:nth-child(3){
+    grid-column:span 2;
+  }
+  .flagship-grid .flagship-card:nth-child(4){
+    grid-column:2 / span 2;
+  }
+  .flagship-grid .flagship-card:nth-child(5){
+    grid-column:4 / span 2;
+  }
+}
+/* Wide: single row of five */
+@media(min-width:1400px){
+  .flagship-grid{
+    grid-template-columns:repeat(5,minmax(0,1fr));
+  }
+  .flagship-grid .flagship-card:nth-child(1),
+  .flagship-grid .flagship-card:nth-child(2),
+  .flagship-grid .flagship-card:nth-child(3),
+  .flagship-grid .flagship-card:nth-child(4),
+  .flagship-grid .flagship-card:nth-child(5){
+    grid-column:auto;
+  }
+}
+.flagship-card{min-height:260px;display:flex;flex-direction:column;}
+.flagship-footnote-wrap{
+  margin-top:36px;
+  padding:22px 24px;
+  border:1px solid rgba(201,168,76,0.22);
+  border-radius:8px;
+  background:rgba(255,255,255,0.03);
+  text-align:center;
+  max-width:920px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.flagship-footnote{
+  font-size:13px;
+  line-height:1.65;
+  color:rgba(255,255,255,0.58);
+  margin:0;
+}
+.flagship-footnote a{
+  color:var(--gold2);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,168,76,0.35);
+  transition:color 0.2s ease,border-color 0.2s ease;
+}
+.flagship-footnote a:hover{color:var(--white);border-bottom-color:rgba(255,255,255,0.35);}
+@media(max-width:639px){
+  .flagship-footnote-wrap{padding:18px 16px;margin-top:28px;}
+}
+
+/* SIGNATURE OUTCOMES (supporting depth) */
+.outcomes-wrap{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.outcomes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+.outcome-item{
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px;
+  padding:20px 18px;
+  transition:border-color 0.2s ease;
+}
+.outcome-item:hover{border-color:rgba(201,168,76,0.28);}
+.outcome-domain{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:rgba(201,168,76,0.85);
+  margin-bottom:10px;
+}
+.outcome-n{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold2);margin-bottom:8px;line-height:1.15;}
+.outcome-d{font-size:13px;line-height:1.6;color:rgba(255,255,255,0.62);}
+/* Legacy impact classes (print) */
 .impact-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;}
 .impact-item{
   background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015));
@@ -272,13 +383,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   justify-content:flex-start;
   transition:border-color 0.2s ease,transform 0.2s ease,box-shadow 0.2s ease;
 }
-.impact-item:hover{border-color:rgba(201,168,76,0.35);box-shadow:0 14px 32px rgba(0,0,0,0.2);}
 .impact-n{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:var(--gold2);line-height:1.1;margin-bottom:8px;letter-spacing:-0.02em;}
 .impact-k{font-size:10px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:rgba(255,255,255,0.48);margin-bottom:10px;}
 .impact-d{font-size:12.5px;line-height:1.55;color:rgba(255,255,255,0.62);}
 
+/* TECH CLUSTERS */
+.tech-section{background:var(--navy2);border-top:1px solid var(--border);}
+.tech-clusters{display:flex;flex-direction:column;gap:32px;}
+.tech-cluster .tech-col-title{margin-bottom:12px;}
+
 /* SELECTED WORK / PROOF CARDS */
-.proof-wrap{background:var(--navy);border-top:1px solid var(--border);}
+.proof-wrap,.flagship-wrap{background:var(--navy);border-top:1px solid var(--border);}
 .proof-grid{display:grid;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr));}
 .proof-grid.proof-grid--quad{grid-template-columns:repeat(2,minmax(0,1fr));}
 .proof-grid.proof-grid--triple{grid-template-columns:repeat(3,minmax(0,1fr));}
@@ -441,7 +556,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   .stat-n{font-size:20px;}
   .section{padding:56px var(--px);}
   .exp-grid{gap:36px;}
-  .impact-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+  .metrics-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+  .outcomes-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
   .proof-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .proof-grid.proof-grid--triple{grid-template-columns:repeat(2,minmax(0,1fr));}
   .proof-grid.proof-grid--quad{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -481,7 +597,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   .hero-contact .dot{display:none;}
   .hero-actions{margin-top:8px;}
   .hero-btn{font-size:10px;padding:7px 9px;}
-  .tl-card:hover,.win:hover,.impact-item:hover,.proof-card:hover,.top-cta:hover,.hero-btn:hover,.hero-btn.alt:hover{transform:none;box-shadow:none;}
+  .tl-card:hover,.win:hover,.impact-item:hover,.metric-item:hover,.proof-card:hover,.top-cta:hover,.hero-btn:hover,.hero-btn.alt:hover{transform:none;box-shadow:none;}
 
   /* hero right: horizontal photo row then panel */
   .hero-right{gap:14px;}
@@ -499,6 +615,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   /* section */
   .section{padding:48px var(--px);}
   .sec-heading{font-size:26px;margin-bottom:28px;}
+  .sec-lead{margin:-14px 0 26px;font-size:13px;}
 
   /* timeline: single column with left spine */
   .tl-legend{gap:10px;margin-bottom:20px;}
@@ -521,6 +638,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   /* expertise: single column */
   .exp-grid{grid-template-columns:1fr;gap:32px;}
   .wins-grid{grid-template-columns:1fr;}
+  .metrics-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .metric-n{font-size:24px;}
+  .outcomes-grid{grid-template-columns:1fr;gap:12px;}
   .impact-grid{grid-template-columns:1fr 1fr;gap:10px;}
   .impact-n{font-size:22px;}
   .proof-grid,.proof-grid.proof-grid--quad,.proof-grid.proof-grid--triple{grid-template-columns:1fr;gap:14px;}
@@ -562,7 +682,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   .fi{opacity:1 !important;transform:none !important;}
   div[style*="background:var(--navy)"],div[style*="background:var(--navy2)"]{background:#f2f2f2 !important;}
 
-  .top-nav,.ring,.scroll-hint,.tl-legend,#techstack,#platforms,#why-hire,.chips,.cta-band,.hero-panel,.hero-cta-row,.hero-cta-note,.hero-actions,.tc-toggle,.tc-details{display:none !important;}
+  .top-nav,.ring,.scroll-hint,.tl-legend,#techstack,#platforms,#why-hire,.chips,.cta-band,.hero-panel,.hero-cta-row,.hero-cta-note,.hero-actions,.hero-pillars,.hero-lede,.sec-lead,.flagship-footnote-wrap,.tc-toggle,.tc-details{display:none !important;}
   .hero,.section,.footer{padding:0 !important;max-width:none !important;}
   .hero{min-height:auto !important;margin-bottom:8mm;}
   .hero-grid{display:block !important;}
@@ -581,15 +701,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   .photo-wrap{width:17mm;height:17mm;border-color:#999 !important;}
   .photo-name,.photo-sub,.photo-loc{color:#111 !important;}
 
-  .impact-wrap,.wins-wrap{background:#fff !important;border:none !important;margin-bottom:4mm;}
+  .metrics-wrap,.outcomes-wrap,.impact-wrap,.wins-wrap{background:#fff !important;border:none !important;margin-bottom:4mm;}
   .sec-eyebrow{font-size:8pt !important;color:#222 !important;margin:0 0 1mm 0;}
   .sec-heading{font-size:15pt !important;color:#0a0a0a !important;margin:0 0 2mm 0;}
+  .metrics-grid{grid-template-columns:repeat(3,1fr) !important;gap:1.5mm;}
+  .outcomes-grid{grid-template-columns:repeat(2,1fr) !important;gap:1.5mm;}
   .impact-grid{grid-template-columns:repeat(4,1fr) !important;gap:1.5mm;}
   .wins-grid{grid-template-columns:repeat(5,1fr) !important;gap:1.5mm;}
-  .impact-item,.win{padding:2mm !important;background:#ececec !important;border-color:#9f9f9f !important;box-shadow:none !important;transform:none !important;}
-  .impact-n,.win-n{font-size:13pt !important;color:#0a0a0a !important;margin-bottom:1mm;}
-  .impact-k,.win-l{font-size:7pt !important;color:#222 !important;margin-bottom:1mm;}
-  .impact-d,.win-d{font-size:8pt !important;color:#111 !important;line-height:1.3;}
+  .metric-item,.outcome-item,.impact-item,.win{padding:2mm !important;background:#ececec !important;border-color:#9f9f9f !important;box-shadow:none !important;transform:none !important;}
+  .metric-n,.outcome-n,.impact-n,.win-n{font-size:13pt !important;color:#0a0a0a !important;margin-bottom:1mm;}
+  .metric-k,.outcome-domain,.impact-k,.win-l{font-size:7pt !important;color:#222 !important;margin-bottom:1mm;}
+  .metric-d,.outcome-d,.impact-d,.win-d{font-size:8pt !important;color:#111 !important;line-height:1.3;}
 
   #timeline{page-break-inside:avoid;}
   .tl-spine-line{display:none !important;}
@@ -619,11 +741,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
     <a class="top-brand" href="#top">Vihar Nar</a>
     <div class="top-links">
       <a href="#top">About</a>
-      <a href="#impact">Impact</a>
+      <a href="#metrics">Metrics</a>
       <a href="#platforms">Work</a>
-      <a href="#why-hire">Why me</a>
-      <a href="#techstack">Stack</a>
+      <a href="#outcomes">Outcomes</a>
       <a href="#timeline">Timeline</a>
+      <a href="#techstack">Stack</a>
+      <a href="#why-hire">Why me</a>
       <a href="#contact">Contact</a>
     </div>
     <a class="top-cta" href="mailto:vihar.nar@professional.mit.edu?subject=Intro%20Conversation%20%E2%80%93%20Engineering%20Leadership">Book intro</a>
@@ -640,16 +763,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
       <div class="eyebrow">Software Engineering Executive</div>
       <h1 class="hero-name">Vihar<br>Nar</h1>
       <div class="hero-title">Senior Director / VP, Software Engineering</div>
-      <p class="hero-pillars">Enterprise Platforms <span>&middot;</span> Enterprise Architecture <span>&middot;</span> Workflow Orchestration <span>&middot;</span> Systems Integration <span>&middot;</span> Cloud &amp; AI Transformation <span>&middot;</span> SDLC Governance</p>
-      <p class="hero-lede">I lead enterprise workflow orchestration and platform modernization in regulated environments: target-state architecture, cloud-native delivery, observability, and governance that speeds teams up without trading away audit readiness.</p>
-      <p class="hero-about">Differentiation is execution at scale&mdash;connecting strategy, architecture, and delivery. I have built and scaled 50+ person organizations, accelerated release velocity by 40%, sustained 99.99% uptime, and shipped AI-assisted capabilities with traceability built in.</p>
+      <p class="hero-pillars">Enterprise Platforms <span>&middot;</span> Workflow Orchestration <span>&middot;</span> Enterprise Architecture <span>&middot;</span> Systems Integration <span>&middot;</span> Cloud &amp; AI Transformation <span>&middot;</span> SDLC Governance</p>
+      <p class="hero-lede">I lead software and platform engineering organizations that deliver mission-critical systems&mdash;workflow orchestration, enterprise integration, and cloud-native software&mdash;with observability, reliability, and controls that stand up in regulated environments.</p>
+      <p class="hero-about">Differentiation is outcomes at scale: target-state architecture, delivery systems that actually speed teams up, and governance that connects executives to shipped software. I have scaled organizations to 55 FTE, accelerated delivery materially, sustained 99.99% uptime, and shipped AI-assisted capabilities with traceability built in&mdash;a modern platform executive who is unusually strong where compliance and audit matter.</p>
       <div class="tags">
+        <span class="tag">Software Engineering Executive</span>
         <span class="tag">Platform Engineering</span>
-        <span class="tag">Workflow Orchestration</span>
         <span class="tag">Enterprise Architecture</span>
+        <span class="tag">Workflow Orchestration</span>
+        <span class="tag">Cloud &amp; AI Transformation</span>
         <span class="tag">OpenTelemetry / Grafana</span>
-        <span class="tag">Cloud-Native Delivery</span>
-        <span class="tag">AI Strategy &amp; Governance</span>
         <span class="tag">Compliance-by-Design</span>
         <span class="tag">Regulated Healthcare</span>
       </div>
@@ -660,7 +783,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
         <a class="hero-btn alt" href="mailto:vihar.nar@professional.mit.edu?subject=Intro%20Conversation%20%E2%80%93%20Engineering%20Leadership">Book intro conversation</a>
         <a class="hero-btn alt" href="https://linkedin.com/in/viharnar" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
       </div>
-      <p class="hero-cta-note">Health Codex is an independent build (live site). Onco Ally and other MIT-linked demos are linked in Selected work below.</p>
+      <p class="hero-cta-note">Health Codex is live. Flagship platforms, metrics, and outcomes are below—then career timeline and stack.</p>
       <div class="hero-contact">
         <a href="mailto:vihar.nar@professional.mit.edu">vihar.nar@professional.mit.edu</a>
         <span class="dot">&middot;</span>
@@ -694,122 +817,96 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
   <div class="scroll-hint"><span>&#8595;</span> Scroll to explore</div>
 </section>
 
-<!-- IMPACT AT A GLANCE -->
-<div class="impact-wrap" id="impact">
+<!-- SIGNATURE METRICS (6) -->
+<div class="metrics-wrap" id="metrics">
   <div class="section">
-    <div class="sec-eyebrow">Proof</div>
-    <div class="sec-heading">Impact at a glance</div>
-    <div class="impact-grid">
-      <div class="impact-item"><div class="impact-k">Experience</div><div class="impact-n">20+ yrs</div><div class="impact-d">Hands-on to executive leadership across regulated healthcare, biotech, and enterprise platforms.</div></div>
-      <div class="impact-item"><div class="impact-k">Org scale</div><div class="impact-n">55 FTE</div><div class="impact-d">Scaled engineering capability from a focused core to a 55-person organization.</div></div>
-      <div class="impact-item"><div class="impact-k">Business value</div><div class="impact-n">~$38M</div><div class="impact-d">Enterprise workflow orchestration supporting high-value order, lab, and clinical workflows.</div></div>
-      <div class="impact-item"><div class="impact-k">Reliability</div><div class="impact-n">99.99%</div><div class="impact-d">Production posture strengthened with observability, risk-based controls, and operational discipline.</div></div>
-      <div class="impact-item"><div class="impact-k">Velocity</div><div class="impact-n">40%</div><div class="impact-d">Faster delivery through CI/CD golden paths, reusable templates, and automated release gates.</div></div>
-      <div class="impact-item"><div class="impact-k">SDLC intelligence</div><div class="impact-n">92%</div><div class="impact-d">Release-risk prediction accuracy using AI-powered signals embedded in delivery workflows.</div></div>
-      <div class="impact-item"><div class="impact-k">Audit efficiency</div><div class="impact-n">90%</div><div class="impact-d">Reduction in audit preparation effort through traceability, evidence capture, and governance.</div></div>
-      <div class="impact-item"><div class="impact-k">Regulatory outcomes</div><div class="impact-n">Zero</div><div class="impact-d">Sustained inspections with no regulatory findings across FDA, ISO 13485, and IEC 62304.</div></div>
+    <div class="sec-eyebrow">Executive proof</div>
+    <div class="sec-heading">Signature metrics</div>
+    <p class="sec-lead">Curated headline outcomes—aligned to current role, org scale, and platform delivery.</p>
+    <div class="metrics-grid">
+      <div class="metric-item"><div class="metric-k">Experience</div><div class="metric-n">20+ yrs</div><div class="metric-d">Software and platform leadership from hands-on engineering to multi-team executive scope.</div></div>
+      <div class="metric-item"><div class="metric-k">Engineers scaled</div><div class="metric-n">55</div><div class="metric-d">Organizations built and scaled to 55 FTE with clear operating models and delivery accountability.</div></div>
+      <div class="metric-item"><div class="metric-k">Business / platform value</div><div class="metric-n">~$38M</div><div class="metric-d">Enterprise workflow orchestration supporting high-value order, lab, and clinical workflows.</div></div>
+      <div class="metric-item"><div class="metric-k">Uptime</div><div class="metric-n">99.99%</div><div class="metric-d">Reliability-by-design: observability, risk-based controls, and disciplined production operations.</div></div>
+      <div class="metric-item"><div class="metric-k">Faster delivery</div><div class="metric-n">40%</div><div class="metric-d">Developer velocity and release acceleration through golden paths, templates, and automated gates.</div></div>
+      <div class="metric-item"><div class="metric-k">Release-risk accuracy</div><div class="metric-n">92%</div><div class="metric-d">AI-powered SDLC intelligence embedded in delivery—not a slide, a working signal.</div></div>
     </div>
   </div>
 </div>
 
-<!-- SELECTED PLATFORMS / PROOF -->
-<div class="proof-wrap" id="platforms">
+<!-- FLAGSHIP PLATFORMS / SELECTED WORK -->
+<div class="flagship-wrap proof-wrap" id="platforms">
   <div class="section">
-    <div class="sec-eyebrow">Selected work</div>
-    <div class="sec-heading">Platforms, products &amp; proof</div>
-
-    <div class="proof-group">
-      <div class="proof-subhead">Enterprise &amp; leadership<span class="proof-subhead-note">Delivery ownership, org scale, and governance inside the enterprise.</span></div>
-      <div class="proof-grid proof-grid--quad">
-        <article class="proof-card">
-          <h3>Enterprise workflow orchestration platform</h3>
-          <p class="proof-desc">Unified order management, lab workflows, and clinical reporting with scalable integration, release governance, OpenTelemetry/Grafana observability, and compliance-by-design.</p>
-          <p class="proof-value"><strong>Value:</strong> Mission-critical reliability, faster change confidence, and traceable delivery in a regulated product footprint.</p>
-          <div class="proof-actions">
-            <a href="#timeline">Career timeline</a>
-          </div>
-        </article>
-        <article class="proof-card">
-          <h3>AI-assisted regulated application</h3>
-          <p class="proof-desc">Claude-based workflows with RAG, context assembly, prompt routing, audit logging, and cloud-native delivery for compliant AI adoption in production contexts.</p>
-          <p class="proof-value"><strong>Value:</strong> Modern AI experiences with controls appropriate for regulated systems&mdash;traceability without stalling innovation.</p>
-          <div class="proof-actions">
-            <a href="#timeline">Current role</a>
-          </div>
-        </article>
-        <article class="proof-card">
-          <h3>Enterprise Quality &amp; Compliance organization</h3>
-          <p class="proof-desc">EQCE built from the ground up and scaled to serve the enterprise: SDLC governance, compliance automation, AI-enabled delivery signals, and audit-ready engineering practices.</p>
-          <p class="proof-value"><strong>Value:</strong> A function that connects quality, velocity, and evidence&mdash;so the enterprise ships faster with defensible controls.</p>
-          <div class="proof-actions">
-            <a href="#timeline">EQCE chapter</a>
-          </div>
-        </article>
-        <article class="proof-card">
-          <h3>Engineering leadership framework</h3>
-          <p class="proof-desc">Operating model, leadership principles, org design, SDLC Council&mdash;how strategy, architecture, and execution line up on the ground.</p>
-          <p class="proof-value"><strong>Value:</strong> Repeatable scale: decision rights, governance that helps velocity, and accountability without bureaucracy theater.</p>
-          <div class="proof-actions">
-            <a href="#why-hire">Why teams bring me in</a>
-            <a class="alt" href="#timeline">Timeline</a>
-          </div>
-        </article>
-      </div>
+    <div class="sec-eyebrow">Proof artifacts</div>
+    <div class="sec-heading">Flagship platforms &amp; selected work</div>
+    <p class="sec-lead">Named initiatives and products—enterprise delivery plus independent builds—shown as tangible engineering and product proof.</p>
+    <div class="flagship-grid">
+      <article class="proof-card flagship-card">
+        <h3>Enterprise workflow orchestration platform</h3>
+        <p class="proof-desc">Unified order management, lab workflows, and clinical reporting through scalable integration, release governance, observability, and compliance-by-design.</p>
+        <p class="proof-value"><strong>Value:</strong> Mission-critical reliability, confident change, and traceable delivery in a regulated product footprint.</p>
+        <div class="proof-actions"><a href="#timeline">Career detail</a></div>
+      </article>
+      <article class="proof-card flagship-card">
+        <h3>Health Codex</h3>
+        <p class="proof-desc">Framework-driven portal for regulated software compliance, traceability, lifecycle governance, and AI enablement for audit-ready engineering teams.</p>
+        <p class="proof-value"><strong>Value:</strong> Policy translated into runnable engineering practice—independent of my employer.</p>
+        <div class="proof-actions"><a href="https://health-codex.com/" target="_blank" rel="noopener noreferrer">Open Health Codex</a></div>
+      </article>
+      <article class="proof-card flagship-card">
+        <h3>AI-assisted regulated application</h3>
+        <p class="proof-desc">Claude-based workflows using RAG, context assembly, prompt routing, audit logging, and cloud-native delivery to enable compliant AI adoption.</p>
+        <p class="proof-value"><strong>Value:</strong> Modern AI UX with evidence and controls appropriate for regulated systems.</p>
+        <div class="proof-actions"><a href="#timeline">Current role</a></div>
+      </article>
+      <article class="proof-card flagship-card">
+        <h3>Onco Ally</h3>
+        <p class="proof-desc">Domain-oriented software experience demonstrating how clinical and oncology workflows can be translated into usable digital products.</p>
+        <p class="proof-value"><strong>Value:</strong> MIT CTO Impact Project—domain narrative, product craft, and credible clinical storytelling.</p>
+        <div class="proof-actions"><a href="https://vnar.github.io/onco-ally/" target="_blank" rel="noopener noreferrer">View Onco Ally</a></div>
+      </article>
+      <article class="proof-card flagship-card">
+        <h3>Engineering leadership framework</h3>
+        <p class="proof-desc">My operating model for engineering leadership, governance, org design, execution, and scale—how strategy becomes shipped software.</p>
+        <p class="proof-value"><strong>Value:</strong> Repeatable leadership system: decision rights, governance that helps velocity, accountability without theater.</p>
+        <div class="proof-actions"><a href="#why-hire">Operating lens</a><a class="alt" href="#timeline">Timeline</a></div>
+      </article>
     </div>
+    <div class="flagship-footnote-wrap">
+      <p class="flagship-footnote">Additional independent work: <a href="https://ojas-health.com/" target="_blank" rel="noopener noreferrer">Ojas Health</a> — health tracking and AI-assisted recommendations. EQCE org build (&lt;$6M budget, 15&rarr;55 FTE) sits in <a href="#outcomes">signature outcomes</a> and <a href="#timeline">timeline</a>.</p>
+    </div>
+  </div>
+</div>
 
-    <div class="proof-group">
-      <div class="proof-subhead">Independent &amp; academic<span class="proof-subhead-note">Personal builds and MIT work outside day-to-day enterprise delivery.</span></div>
-      <div class="proof-grid proof-grid--triple">
-        <article class="proof-card">
-          <h3>Health Codex</h3>
-          <p class="proof-desc">Independent portal for regulated software compliance&mdash;traceability, lifecycle governance, and AI enablement for audit-ready engineering teams.</p>
-          <p class="proof-value"><strong>Note:</strong> Created outside my employer; demonstrates product thinking in compliance and SDLC.</p>
-          <div class="proof-actions">
-            <a href="https://health-codex.com/" target="_blank" rel="noopener noreferrer">Open Health Codex</a>
-          </div>
-        </article>
-        <article class="proof-card">
-          <h3>Onco Ally</h3>
-          <p class="proof-desc">MIT CTO Impact Project: an AI-forward oncology experience&mdash;patient and provider journeys, platform narrative, and credible clinical storytelling.</p>
-          <p class="proof-value"><strong>Note:</strong> Academic / demonstration site showcasing domain-to-product translation.</p>
-          <div class="proof-actions">
-            <a href="https://vnar.github.io/onco-ally/" target="_blank" rel="noopener noreferrer">View Onco Ally</a>
-          </div>
-        </article>
-        <article class="proof-card">
-          <h3>Ojas Health</h3>
-          <p class="proof-desc">Independent health-tracking portal with AI-assisted recommendations&mdash;personal wellness signals, lightweight UX, and responsible guidance framing.</p>
-          <p class="proof-value"><strong>Note:</strong> Personal build; complements the regulated-enterprise story with consumer-oriented product craft.</p>
-          <div class="proof-actions">
-            <a href="https://ojas-health.com/" target="_blank" rel="noopener noreferrer">Open Ojas Health</a>
-          </div>
-        </article>
+<!-- SIGNATURE OUTCOMES (supporting depth) -->
+<div class="outcomes-wrap" id="outcomes">
+  <div class="section">
+    <div class="sec-eyebrow">Depth</div>
+    <div class="sec-heading">Signature outcomes</div>
+    <p class="sec-lead">Regulatory, audit, org, and governance depth behind the headline metrics.</p>
+    <div class="outcomes-grid">
+      <div class="outcome-item">
+        <div class="outcome-domain">Regulatory execution</div>
+        <div class="outcome-n">Zero findings</div>
+        <div class="outcome-d">Sustained FDA, ISO 13485, and IEC 62304 inspections with no regulatory findings—evidence-led engineering, not last-minute scramble.</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-domain">Audit &amp; evidence efficiency</div>
+        <div class="outcome-n">~90% reduction</div>
+        <div class="outcome-d">Audit preparation effort reduced through traceability, evidence capture, and governance automation tied to real SDLC workflows.</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-domain">Org scale &amp; investment</div>
+        <div class="outcome-n">15 &rarr;55 FTE · &lt;$6M</div>
+        <div class="outcome-d">EQCE built and scaled under a &lt;$6M budget—enterprise quality and compliance as a deliberate platform function, not an afterthought.</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-domain">Executive governance</div>
+        <div class="outcome-n">SDLC Council</div>
+        <div class="outcome-d">Cross-functional governance connecting architecture, policy, and execution—so platform decisions stick in delivery and inspection readiness.</div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- WHY HIRE -->
-<div class="why-wrap" id="why-hire">
-  <div class="section">
-    <div class="sec-eyebrow">Executive fit</div>
-    <div class="sec-heading">Why teams bring me in</div>
-    <div class="why-grid">
-      <div class="why-item"><div class="why-i">01</div><p>Build and scale engineering organizations with clear operating models, hiring bar, and delivery accountability.</p></div>
-      <div class="why-item"><div class="why-i">02</div><p>Modernize platforms and delivery systems: CI/CD golden paths, observability, and cloud-native execution.</p></div>
-      <div class="why-item"><div class="why-i">03</div><p>Connect architecture, governance, and execution so strategy shows up in shipped software and measurable outcomes.</p></div>
-      <div class="why-item"><div class="why-i">04</div><p>Lead regulated, mission-critical environments without slowing innovation&mdash;compliance as a product of good engineering.</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- TECH STACK -->
-<div style="background:var(--navy2);border-top:1px solid var(--border);">
-<div class="section" id="techstack">
-  <div class="sec-eyebrow">Stack</div>
-  <div class="sec-heading">Technologies &amp; Platforms</div>
-  <div class="tech-cloud" id="techCloud"></div>
-</div>
 </div>
 
 <!-- TIMELINE -->
@@ -832,15 +929,40 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);
 </div>
 </div>
 
+<!-- TECH STACK (clustered) -->
+<div class="tech-section">
+<div class="section" id="techstack">
+  <div class="sec-eyebrow">Stack</div>
+  <div class="sec-heading">Technologies &amp; platforms</div>
+  <p class="sec-lead">Capability clusters for platform execution, reliability, and governance—not a flat tag dump.</p>
+  <div class="tech-clusters" id="techClusters"></div>
+</div>
+</div>
+
+<!-- WHY HIRE -->
+<div class="why-wrap" id="why-hire">
+  <div class="section">
+    <div class="sec-eyebrow">Executive fit</div>
+    <div class="sec-heading">Why teams bring me in</div>
+    <div class="why-grid">
+      <div class="why-item"><div class="why-i">01</div><p>Build and scale engineering organizations with clear operating models, hiring bar, and delivery accountability.</p></div>
+      <div class="why-item"><div class="why-i">02</div><p>Modernize platforms and delivery systems: CI/CD golden paths, observability, and cloud-native execution.</p></div>
+      <div class="why-item"><div class="why-i">03</div><p>Connect architecture, governance, and execution so strategy shows up in shipped software and measurable outcomes.</p></div>
+      <div class="why-item"><div class="why-i">04</div><p>Lead regulated, mission-critical environments without slowing innovation&mdash;compliance as a product of good engineering.</p></div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div class="footer" id="contact">
   <div class="cta-band">
-    <p>Next step: review the impact summary, explore selected platforms, then reach out for a focused intro conversation.</p>
+    <p>Review signature metrics and flagship work, then choose a next step—resume, Health Codex, or a short intro conversation.</p>
     <div class="cta-band-actions">
       <button class="hero-btn" type="button" id="footerResumeBtn">View resume</button>
       <a class="hero-btn alt" href="#platforms">Explore selected work</a>
-      <a class="hero-btn alt" href="mailto:vihar.nar@professional.mit.edu?subject=Intro%20Conversation%20%E2%80%93%20Engineering%20Leadership">Book intro conversation</a>
+      <a class="hero-btn alt" href="https://health-codex.com/" target="_blank" rel="noopener noreferrer">Visit Health Codex</a>
       <a class="hero-btn alt" href="https://linkedin.com/in/viharnar" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+      <a class="hero-btn alt" href="mailto:vihar.nar@professional.mit.edu?subject=Intro%20Conversation%20%E2%80%93%20Engineering%20Leadership">Book intro conversation</a>
     </div>
   </div>
   <h2>Open to new opportunities</h2>
@@ -992,7 +1114,7 @@ var exp = [
     company: 'Foundation Medicine',
     dates: 'Feb 2024 - Aug 2025',
     year: 2024.1,
-    summary: 'Built and scaled FMI\'s EQCE function from 15 to 55 FTEs with an under-$6M budget. Enterprise capability spanning QE, SDLC governance, compliance automation, and AI-enabled delivery.',
+    summary: 'Built and scaled FMI\'s EQCE function from 15 to 55 FTEs with a &lt;$6M budget. Enterprise capability spanning QE, SDLC governance, compliance automation, and AI-enabled delivery.',
     metrics: ['15 to 55 FTEs', '<$6M EQCE budget', '92% AI prediction', '-90% audit prep', '-10% bugs YoY'],
     bullets: [
       '<b>92% release-risk prediction accuracy</b> - AI-powered SDLC intelligence at enterprise scale.',
@@ -1009,15 +1131,16 @@ var exp = [
     dates: 'Sep 2025 - Present',
     year: 2025.7,
     current: true,
-    summary: 'Lead software engineering strategy and execution for enterprise workflow orchestration: order management, lab operations, and clinical reporting, supporting roughly $38M in annual business value (since Sep 2025).',
-    metrics: ['+40% velocity', '~$38M ARR/value', '99.99% uptime', 'AI policy author', '3 scrum teams'],
+    summary: 'Since Sep 2025: Senior Director, Software Engineering—leading enterprise workflow orchestration across order management, lab operations, and clinical reporting (~$38M business/platform value). Target-state integration architecture, cloud-native delivery, AI engineering governance, and observability-led reliability.',
+    metrics: ['Sep 2025+', '+40% velocity', '~$38M value', '99.99% uptime', 'AI policy', '3 teams'],
     bullets: [
-      '<b>+40% developer velocity</b> - CI/CD golden paths, reusable workflow templates, automated release controls.',
-      'Defined target-state architecture for scalable integration across lab ops, order workflows, and clinical systems.',
-      '<b>Authored Foundation Medicine\'s enterprise AI policy</b> - Roche-aligned governance for responsible AI.',
+      '<b>Platform &amp; delivery leadership</b> for workflow orchestration—cross-functional ownership of integration, release, and production posture.',
+      '<b>Target-state architecture</b> for scalable integration across lab ops, order workflows, and clinical systems.',
+      '<b>+40% developer velocity</b> via CI/CD golden paths, reusable workflow templates, and automated release controls.',
+      '<b>AI engineering strategy</b>: authored enterprise AI policy (Roche-aligned); Claude / RAG / prompt routing with audit logging for compliant adoption.',
       '<b>99.99% uptime</b> through OpenTelemetry, Grafana, and risk-based release controls.',
-      'Embedded compliance-by-design: audit logging, evidence capture, and traceability for FDA / ISO 13485 / IEC 62304.',
-      'Launched AI-assisted regulated application using Claude-based workflows, RAG, context assembly, prompt routing, and audit logging.'
+      '<b>Compliance-by-design</b>—traceability and evidence without treating quality as a separate silo.',
+      'Launched AI-assisted regulated application: Claude-based workflows, RAG, context assembly, prompt routing, audit logging, cloud-native delivery.'
     ]
   }
 ];
@@ -1184,9 +1307,9 @@ var domains = [
   {l:'Observability (OTel / Grafana)', y:12, p:78},
   {l:'AI Engineering Strategy & Governance', y:10, p:72},
   {l:'Executive Governance & SDLC Council', y:12, p:76},
-  {l:'Quality Engineering & Compliance', y:18, p:86},
   {l:'Org Design & People Leadership', y:12, p:74},
-  {l:'FinTech / Post-Trade Infrastructure', y:10, p:62}
+  {l:'FinTech / Post-Trade Infrastructure', y:10, p:62},
+  {l:'Quality Engineering & Compliance', y:18, p:86}
 ];
 var heroBarsCol = document.getElementById('heroBarsCol');
 domains.forEach(function(d){
@@ -1201,26 +1324,37 @@ setTimeout(function(){
   document.querySelectorAll('.hero-bar-fill').forEach(function(f){ f.classList.add('on'); });
 }, 600);
 
-// ── HERO TECH CLOUD ──
-var techs = [
-  {t:'Python',h:1},{t:'Java',h:0},{t:'TypeScript',h:0},{t:'React',h:0},
-  {t:'Node.js',h:0},{t:'Spring Boot',h:0},
-  {t:'AWS',h:1},{t:'Azure',h:0},{t:'Kubernetes',h:1},{t:'Docker',h:0},
-  {t:'Terraform',h:0},{t:'GitHub Actions',h:1},{t:'Jenkins',h:0},
-  {t:'OpenTelemetry',h:1},{t:'Grafana',h:1},{t:'Datadog',h:0},{t:'New Relic',h:0},
-  {t:'Playwright',h:0},{t:'Selenium',h:0},{t:'Cypress',h:0},{t:'qTest',h:0},
-  {t:'SonarQube',h:0},{t:'Veracode',h:0},
-  {t:'Veeva QMS',h:0},{t:'ServiceNow',h:0},
-  {t:'Claude / GenAI',h:1},{t:'AI Policy',h:1},{t:'SDLC Intelligence',h:1},
-  {t:'Policy-as-Code',h:1},
-  {t:'FDA 21 CFR 820',h:0},{t:'IEC 62304',h:0},{t:'ISO 13485',h:0},{t:'HIPAA',h:0},{t:'GDPR',h:0},
-  {t:'Agile / SAFe',h:0},{t:'Value Stream Mgmt',h:0},
-  {t:'CTM / ALERT',h:0},{t:'DTCC Platforms',h:0}
+// ── TECH STACK (clusters) ──
+var techClusters = [
+  {title:'Platform & Architecture',items:[
+    {t:'Python',h:1},{t:'Java',h:0},{t:'TypeScript',h:0},{t:'React',h:0},{t:'Node.js',h:0},{t:'Spring Boot',h:0},
+    {t:'Terraform',h:0},{t:'Agile / SAFe',h:0},{t:'Value Stream Mgmt',h:0}
+  ]},
+  {title:'Cloud & DevOps',items:[
+    {t:'AWS',h:1},{t:'Azure',h:0},{t:'Kubernetes',h:1},{t:'Docker',h:0},{t:'GitHub Actions',h:1},{t:'Jenkins',h:0}
+  ]},
+  {title:'AI & Automation',items:[
+    {t:'Claude / GenAI',h:1},{t:'AI Policy',h:1},{t:'SDLC Intelligence',h:1},{t:'Policy-as-Code',h:1}
+  ]},
+  {title:'Observability & Reliability',items:[
+    {t:'OpenTelemetry',h:1},{t:'Grafana',h:1},{t:'Datadog',h:0},{t:'New Relic',h:0},
+    {t:'Playwright',h:0},{t:'Selenium',h:0},{t:'Cypress',h:0},{t:'qTest',h:0}
+  ]},
+  {title:'Governance & Compliance',items:[
+    {t:'SonarQube',h:0},{t:'Veracode',h:0},{t:'Veeva QMS',h:0},{t:'ServiceNow',h:0},
+    {t:'FDA 21 CFR 820',h:0},{t:'IEC 62304',h:0},{t:'ISO 13485',h:0},{t:'HIPAA',h:0},{t:'GDPR',h:0},
+    {t:'CTM / ALERT',h:0},{t:'DTCC Platforms',h:0}
+  ]}
 ];
-var htc = document.getElementById('techCloud');
-techs.forEach(function(t){
-  htc.innerHTML += '<span class="tech-tag'+(t.h?' h':'')+'">'+t.t+'</span>';
-});
+var techClustersEl = document.getElementById('techClusters');
+if(techClustersEl){
+  techClusters.forEach(function(cl){
+    var inner = cl.items.map(function(t){
+      return '<span class="tech-tag'+(t.h?' h':'')+'">'+t.t+'</span>';
+    }).join('');
+    techClustersEl.innerHTML += '<div class="tech-cluster"><div class="tech-col-title">'+cl.title+'</div><div class="tech-cloud">'+inner+'</div></div>';
+  });
+}
 </script>
 </body>
 </html>
